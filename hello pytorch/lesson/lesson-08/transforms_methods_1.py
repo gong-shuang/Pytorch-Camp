@@ -26,10 +26,10 @@ sys.path.append(hello_pytorch_DIR)
 from tools.my_dataset import RMBDataset
 from tools.common_tools import set_seed, transform_invert
 
-set_seed(1)  # 设置随机种子
+set_seed(100)  # 设置随机种子
 
 # 参数设置
-MAX_EPOCH = 10
+MAX_EPOCH = 1
 BATCH_SIZE = 1
 LR = 0.01
 log_interval = 10
@@ -37,18 +37,21 @@ val_interval = 1
 rmb_label = {"1": 0, "100": 1}
 
 # ============================ step 1/5 数据 ============================
-split_dir = os.path.abspath(os.path.join("..", "..", "data", "rmb_split"))
-if not os.path.exists(split_dir):
-    raise Exception(r"数据 {} 不存在, 回到lesson-06\1_split_dataset.py生成数据".format(split_dir))
-train_dir = os.path.join(split_dir, "train")
-valid_dir = os.path.join(split_dir, "valid")
+# split_dir = os.path.abspath(os.path.join("..", "..", "data", "rmb_split"))
+# if not os.path.exists(split_dir):
+#     raise Exception(r"数据 {} 不存在, 回到lesson-06\1_split_dataset.py生成数据".format(split_dir))
+# train_dir = os.path.join(split_dir, "train")
+# valid_dir = os.path.join(split_dir, "valid")
+# 替换成自己的
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+train_dir = os.path.join(BASE_DIR, "data")
 
 norm_mean = [0.485, 0.456, 0.406]
 norm_std = [0.229, 0.224, 0.225]
 
 
 train_transform = transforms.Compose([
-    transforms.Resize((224, 224)),
+    # transforms.Resize((224, 224)),
 
     # 1 CenterCrop
     # transforms.CenterCrop(512),     # 512
@@ -80,7 +83,7 @@ train_transform = transforms.Compose([
     # transforms.RandomVerticalFlip(p=0.5),
 
     # 3 RandomRotation
-    # transforms.RandomRotation(90),
+    transforms.RandomRotation(90),
     # transforms.RandomRotation((90), expand=True),
     # transforms.RandomRotation(30, center=(0, 0)),
     # transforms.RandomRotation(30, center=(0, 0), expand=True),   # expand only for center rotation
@@ -97,11 +100,11 @@ valid_transform = transforms.Compose([
 
 # 构建MyDataset实例
 train_data = RMBDataset(data_dir=train_dir, transform=train_transform)
-valid_data = RMBDataset(data_dir=valid_dir, transform=valid_transform)
+# valid_data = RMBDataset(data_dir=valid_dir, transform=valid_transform)
 
 # 构建DataLoder
 train_loader = DataLoader(dataset=train_data, batch_size=BATCH_SIZE, shuffle=True)
-valid_loader = DataLoader(dataset=valid_data, batch_size=BATCH_SIZE)
+# valid_loader = DataLoader(dataset=valid_data, batch_size=BATCH_SIZE)
 
 
 # ============================ step 5/5 训练 ============================
@@ -115,7 +118,7 @@ for epoch in range(MAX_EPOCH):
         plt.imshow(img)
         plt.show()
         plt.pause(0.5)
-        plt.close()
+        # plt.close()
 
         # bs, ncrops, c, h, w = inputs.shape
         # for n in range(ncrops):

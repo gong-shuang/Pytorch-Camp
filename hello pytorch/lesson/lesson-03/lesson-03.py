@@ -45,7 +45,7 @@ if flag:
 flag = False
 
 if flag:
-    a = torch.ones((2, 7))  # 7
+    a = torch.ones((2, 10))  # 7
     list_of_tensors = torch.chunk(a, dim=1, chunks=3)   # 3
 
     for idx, t in enumerate(list_of_tensors):
@@ -61,7 +61,7 @@ flag = False
 if flag:
     t = torch.ones((2, 5))
 
-    list_of_tensors = torch.split(t, [2, 1, 1], dim=1)  # [2 , 1, 2]
+    list_of_tensors = torch.split(t, [2, 1, 2], dim=1)  # [2 , 1, 2]
     for idx, t in enumerate(list_of_tensors):
         print("第{}个张量：{}, shape is {}".format(idx+1, t, t.shape))
 
@@ -79,6 +79,7 @@ flag = False
 if flag:
     t = torch.randint(0, 9, size=(3, 3))
     idx = torch.tensor([0, 2], dtype=torch.long)    # float
+    print(idx)
     t_select = torch.index_select(t, dim=0, index=idx)
     print("t:\n{}\nt_select:\n{}".format(t, t_select))
 
@@ -121,8 +122,11 @@ flag = False
 
 if flag:
     # torch.transpose
+    # t = torch.randint(0, 9, size=(5, 5))
+    # t = torch.Tensor(2, 3, 4, 5)
     t = torch.rand((2, 3, 4))
-    t_transpose = torch.transpose(t, dim0=1, dim1=2)    # c*h*w     h*w*c
+    t_transpose = torch.transpose(t, dim0=0, dim1=1)    # c*h*w     h*w*c
+    print("t :{}\nt_transpose : {}".format(t, t_transpose))
     print("t shape:{}\nt_transpose shape: {}".format(t.shape, t_transpose.shape))
 
 
@@ -134,25 +138,28 @@ flag = False
 
 if flag:
     t = torch.rand((1, 2, 3, 1))
+    print(t)
     t_sq = torch.squeeze(t)
     t_0 = torch.squeeze(t, dim=0)
-    t_1 = torch.squeeze(t, dim=1)
+    t_1 = torch.squeeze(t, dim=3)
     print(t.shape)
     print(t_sq.shape)
-    print(t_0.shape)
-    print(t_1.shape)
+    print("t_0 shape: {}\nt_1 shape: {}".format(t_0.shape, t_1.shape))
+    # print(t_0.shape)
+    # print(t_1.shape)
+    print(t_0)
 
 
 # ======================================= example 8 =======================================
 # torch.add
 
-# flag = True
-flag = False
+flag = True
+# flag = False
 
 if flag:
     t_0 = torch.randn((3, 3))
     t_1 = torch.ones_like(t_0)
-    t_add = torch.add(t_0, 10, t_1)
+    t_add = torch.add(t_0, 10)
 
     print("t_0:\n{}\nt_1:\n{}\nt_add_10:\n{}".format(t_0, t_1, t_add))
 

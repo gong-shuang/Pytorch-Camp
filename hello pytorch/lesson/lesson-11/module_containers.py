@@ -36,7 +36,7 @@ class LeNetSequential(nn.Module):
         x = self.classifier(x)
         return x
 
-
+#每一层都有名字。   字典。。。。
 class LeNetSequentialOrderDict(nn.Module):
     def __init__(self, classes):
         super(LeNetSequentialOrderDict, self).__init__()
@@ -69,7 +69,7 @@ class LeNetSequentialOrderDict(nn.Module):
 
 
 # net = LeNetSequential(classes=2)
-# net = LeNetSequentialOrderDict(classes=2)
+# # net = LeNetSequentialOrderDict(classes=2)
 #
 # fake_img = torch.randn((4, 3, 32, 32), dtype=torch.float32)
 #
@@ -80,7 +80,7 @@ class LeNetSequentialOrderDict(nn.Module):
 
 
 # ============================ ModuleList
-
+# for循环实现重复构建。
 class ModuleList(nn.Module):
     def __init__(self):
         super(ModuleList, self).__init__()
@@ -104,7 +104,7 @@ class ModuleList(nn.Module):
 
 
 # ============================ ModuleDict
-
+# 字典
 class ModuleDict(nn.Module):
     def __init__(self):
         super(ModuleDict, self).__init__()
@@ -125,12 +125,13 @@ class ModuleDict(nn.Module):
 
 
 net = ModuleDict()
+# print(net)
 
 fake_img = torch.randn((4, 10, 32, 32))
 
 output = net(fake_img, 'conv', 'relu')
 
-print(output)
+# print(output)
 
 
 
@@ -138,6 +139,7 @@ print(output)
 # 4 AlexNet
 
 alexnet = torchvision.models.AlexNet()
+# print(alexnet)
 
 
 

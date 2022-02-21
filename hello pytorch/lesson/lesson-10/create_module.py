@@ -3,7 +3,7 @@
 # @file name  : create_module.py
 # @author     : TingsongYu https://github.com/TingsongYu
 # @date       : 2019-09-18 10:08:00
-# @brief      : 学习模型创建学习
+# @brief      : 学习模型创建学习（和上一节的一模一样）
 """
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

@@ -21,8 +21,10 @@ if flag:
     y = torch.mul(a, b)
 
     y.backward(retain_graph=True)
-    # print(w.grad)
+    print(w.grad)
+    # w.grad.zero_() # 清零
     y.backward()
+    print(w.grad)
 
 # ====================================== grad_tensors ==============================================
 # flag = True
@@ -38,7 +40,7 @@ if flag:
     y1 = torch.add(a, b)    # y1 = (x+w) + (w+1)    dy1/dw = 2
 
     loss = torch.cat([y0, y1], dim=0)       # [y0, y1]
-    grad_tensors = torch.tensor([1., 2.])
+    grad_tensors = torch.tensor([1., 1.])
 
     loss.backward(gradient=grad_tensors)    # gradient 传入 torch.autograd.backward()中的grad_tensors
 
@@ -73,6 +75,8 @@ if flag:
         b = torch.add(w, 1)
         y = torch.mul(a, b)
 
+        # y = (w+x)(w+1)
+
         y.backward()
         print(w.grad)
 
@@ -102,15 +106,19 @@ if flag:
     a = torch.ones((1, ))
     print(id(a), a)
 
-    # a = a + torch.ones((1, ))
-    # print(id(a), a)
+    a = a + torch.ones((1, ))
+    print(id(a), a)
+    a = a + torch.ones((1,))
+    print(id(a), a)
 
-    a += torch.ones((1, ))
+    a += torch.ones((1, ))   #自运算，共用一个内存，
+    print(id(a), a)
+    a += torch.ones((1,))
     print(id(a), a)
 
 
-flag = True
-# flag = False
+# flag = True
+flag = False
 if flag:
 
     w = torch.tensor([1.], requires_grad=True)
@@ -120,7 +128,17 @@ if flag:
     b = torch.add(w, 1)
     y = torch.mul(a, b)
 
-    w.add_(1)
+    print(a)
+    print(b)
+    print(y)
+
+    print("1111111")
+
+    # w.add_(1)
+    xx = w+x
+    print(xx)
+    yy = w * x
+    print(yy)
     """
     autograd小贴士：
         梯度不自动清零 

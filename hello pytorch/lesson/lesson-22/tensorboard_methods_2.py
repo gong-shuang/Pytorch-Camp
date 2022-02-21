@@ -12,6 +12,7 @@ import torchvision.models as models
 import torchvision.transforms as transforms
 import torchvision.utils as vutils
 from torch.utils.tensorboard import SummaryWriter
+# from tensorboardX import SummaryWriter
 from torch.utils.data import DataLoader
 
 import sys
@@ -82,8 +83,8 @@ if flag:
 
 # ----------------------------------- 5 add_graph -----------------------------------
 
-# flag = 0
-flag = 1
+flag = 0
+# flag = 1
 if flag:
 
     writer = SummaryWriter(comment='test_your_comment', filename_suffix="_test_your_filename_suffix")

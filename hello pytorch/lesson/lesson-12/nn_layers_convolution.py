@@ -37,7 +37,7 @@ img_tensor.unsqueeze_(dim=0)    # C*H*W to B*C*H*W
 flag = 1
 # flag = 0
 if flag:
-    conv_layer = nn.Conv2d(3, 1, 3)   # input:(i, o, size) weights:(o, i , h, w)
+    conv_layer = nn.Conv2d(3, 100, 1, stride=1)   # input:(i, o, size) weights:(o, i , h, w)
     nn.init.xavier_normal_(conv_layer.weight.data)
 
     # calculation
@@ -57,9 +57,11 @@ if flag:
 # ================================= visualization ==================================
 print("卷积前尺寸:{}\n卷积后尺寸:{}".format(img_tensor.shape, img_conv.shape))
 img_conv = transform_invert(img_conv[0, 0:1, ...], img_transform)
-img_raw = transform_invert(img_tensor.squeeze(), img_transform)
-plt.subplot(122).imshow(img_conv, cmap='gray')
-plt.subplot(121).imshow(img_raw)
+# img_conv = transform_invert(img_conv[0, ...], img_transform)
+img_raw = transform_invert(img_tensor.squeeze(), img_transform)   # 反transforms操作。
+plt.subplot(1,5,5).imshow(img_conv, cmap='gray')
+plt.subplot(1,5,3).imshow(img_conv)
+plt.subplot(1,5,1).imshow(img_raw)
 plt.show()
 
 

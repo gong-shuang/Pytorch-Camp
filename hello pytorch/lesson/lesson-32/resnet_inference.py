@@ -106,9 +106,10 @@ if __name__ == "__main__":
     # 2. model
     resnet18 = get_model(model_path, True)
     resnet18.to(device)
-    resnet18.eval()
+    resnet18.eval()  #设置模型的状态
 
     with torch.no_grad():
+        # 下面的运算不需要反向传播，不用算梯度，节省内存
         for idx, img_name in enumerate(img_names):
 
             path_img = os.path.join(img_dir, img_name)

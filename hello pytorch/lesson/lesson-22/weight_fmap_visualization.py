@@ -57,14 +57,14 @@ if flag:
 
 
 # ----------------------------------- feature map visualization -----------------------------------
-# flag = 0
-flag = 1
+flag = 0
+# flag = 1
 if flag:
     with torch.no_grad():
         writer = SummaryWriter(comment='test_your_comment', filename_suffix="_test_your_filename_suffix")
 
         # 数据
-        path_img = "./lena.png"     # your path to image
+        path_img = "./lena.png"     # your path to imageF
         normMean = [0.49139968, 0.48215827, 0.44653124]
         normStd = [0.24703233, 0.24348505, 0.26158768]
 

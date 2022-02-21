@@ -36,7 +36,7 @@ class MLP(nn.Module):
 
             print("layer:{}, std:{}".format(i, x.std()))
             if torch.isnan(x.std()):
-                print("output is nan in {} layers".format(i))
+                # print("output is nan in {} layers".format(i))
                 break
 
         return x
@@ -44,22 +44,22 @@ class MLP(nn.Module):
     def initialize(self):
         for m in self.modules():
             if isinstance(m, nn.Linear):
+                nn.init.normal_(m.weight.data, std=1)    # normal: mean=0, std=1
                 # nn.init.normal_(m.weight.data, std=np.sqrt(1/self.neural_num))    # normal: mean=0, std=1
 
                 # a = np.sqrt(6 / (self.neural_num + self.neural_num))
-                #
                 # tanh_gain = nn.init.calculate_gain('tanh')
+
                 # a *= tanh_gain
-                #
                 # nn.init.uniform_(m.weight.data, -a, a)
 
                 # nn.init.xavier_uniform_(m.weight.data, gain=tanh_gain)
 
                 # nn.init.normal_(m.weight.data, std=np.sqrt(2 / self.neural_num))
-                nn.init.kaiming_normal_(m.weight.data)
+                # nn.init.kaiming_normal_(m.weight.data)
 
-flag = 0
-# flag = 1
+# flag = 0
+flag = 1
 
 if flag:
     layer_nums = 100
@@ -76,8 +76,8 @@ if flag:
 
 # ======================================= calculate gain =======================================
 
-# flag = 0
-flag = 1
+flag = 0
+# flag = 1
 
 if flag:
 

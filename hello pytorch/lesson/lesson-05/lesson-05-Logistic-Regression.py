@@ -21,8 +21,8 @@ x0 = torch.normal(mean_value * n_data, 1) + bias      # 类别0 数据 shape=(10
 y0 = torch.zeros(sample_nums)                         # 类别0 标签 shape=(100)
 x1 = torch.normal(-mean_value * n_data, 1) + bias     # 类别1 数据 shape=(100, 2)
 y1 = torch.ones(sample_nums)                          # 类别1 标签 shape=(100)
-train_x = torch.cat((x0, x1), 0)
-train_y = torch.cat((y0, y1), 0)
+train_x = torch.cat((x0, x1), 0)  # shape=(200, 2)
+train_y = torch.cat((y0, y1), 0)  # shape=(200, )
 
 
 # ============================ step 2/5 选择模型 ============================
@@ -76,11 +76,13 @@ for iteration in range(1000):
         plt.scatter(x0.data.numpy()[:, 0], x0.data.numpy()[:, 1], c='r', label='class 0')
         plt.scatter(x1.data.numpy()[:, 0], x1.data.numpy()[:, 1], c='b', label='class 1')
 
+        print("Iteration: {}, {}".format(iteration, lr_net.features))
+
         w0, w1 = lr_net.features.weight[0]
         w0, w1 = float(w0.item()), float(w1.item())
         plot_b = float(lr_net.features.bias[0].item())
         plot_x = np.arange(-6, 6, 0.1)
-        plot_y = (-w0 * plot_x - plot_b) / w1
+        plot_y = (-w0 * plot_x - plot_b ) / w1
 
         plt.xlim(-5, 7)
         plt.ylim(-7, 7)

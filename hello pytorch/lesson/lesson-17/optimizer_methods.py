@@ -49,8 +49,8 @@ if flag:
 
 
 # ----------------------------------- add_param_group -----------------------------------
-flag = 0
-# flag = 1
+# flag = 0
+flag = 1
 if flag:
     print("optimizer.param_groups is\n{}".format(optimizer.param_groups))
 

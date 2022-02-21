@@ -96,7 +96,7 @@ flag_m1 = 0
 if flag_m1:
     for param in resnet18_ft.parameters():
         param.requires_grad = False
-    print("conv1.weights[0, 0, ...]:\n {}".format(resnet18_ft.conv1.weight[0, 0, ...]))
+    # print("conv1.weights[0, 0, ...]:\n {}".format(resnet18_ft.conv1.weight[0, 0, ...]))
 
 
 # 3/3 替换fc层

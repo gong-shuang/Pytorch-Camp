@@ -46,7 +46,7 @@ norm_std = [0.229, 0.224, 0.225]
 
 
 train_transform = transforms.Compose([
-    transforms.Resize((224, 224)),
+    # transforms.Resize((224, 224)),
 
     # 1 Pad
     # transforms.Pad(padding=32, fill=(255, 0, 0), padding_mode='constant'),
@@ -82,9 +82,9 @@ train_transform = transforms.Compose([
     # transforms.RandomApply([transforms.RandomAffine(degrees=0, shear=45, fillcolor=(255, 0, 0)),
     #                         transforms.Grayscale(num_output_channels=3)], p=0.5),
     # 3 RandomOrder
-    # transforms.RandomOrder([transforms.RandomRotation(15),
-    #                         transforms.Pad(padding=32),
-    #                         transforms.RandomAffine(degrees=0, translate=(0.01, 0.1), scale=(0.9, 1.1))]),
+    transforms.RandomOrder([transforms.RandomRotation(15),
+                            transforms.Pad(padding=32),
+                            transforms.RandomAffine(degrees=0, translate=(0.01, 0.1), scale=(0.9, 1.1))]),
 
     transforms.ToTensor(),
     transforms.Normalize(norm_mean, norm_std),

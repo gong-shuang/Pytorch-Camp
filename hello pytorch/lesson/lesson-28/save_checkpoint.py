@@ -28,7 +28,7 @@ set_seed(1)  # 设置随机种子
 rmb_label = {"1": 0, "100": 1}
 
 # 参数设置
-checkpoint_interval = 5
+checkpoint_interval = 5  #每隔5个保存一下
 MAX_EPOCH = 10
 BATCH_SIZE = 16
 LR = 0.01

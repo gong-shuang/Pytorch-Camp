@@ -7,7 +7,7 @@
 """
 import torch
 import numpy as np
-torch.manual_seed(1)
+torch.manual_seed(10)
 
 # ===============================  example 1 ===============================
 # 通过torch.tensor创建张量
@@ -18,7 +18,7 @@ if flag:
     arr = np.ones((3, 3))
     print("ndarray的数据类型：", arr.dtype)
 
-    t = torch.tensor(arr, device='cuda')
+    t = torch.tensor(arr, device='cuda:1')
     # t = torch.tensor(arr)
 
     print(t)
@@ -28,9 +28,9 @@ if flag:
 flag = False
 if flag:
     arr = np.array([[1, 2, 3], [4, 5, 6]])
-    t = torch.from_numpy(arr)
-    # print("numpy array: ", arr)
-    # print("tensor : ", t)
+    t = torch.from_numpy(arr)   # 与numpy共享内存，修改一个后，另一个也跟着变化
+    print("numpy array: ", arr)
+    print("tensor : ", t)
 
     # print("\n修改arr")
     # arr[0, 0] = 0
@@ -47,7 +47,8 @@ if flag:
 # flag = True
 flag = False
 if flag:
-    out_t = torch.tensor([1])
+    out_t = torch.tensor([6,1,2,3,5,6,7,8,9])  #不管是什么样子的形状都可以的。
+    print("out_t：", out_t)
 
     t = torch.zeros((3, 3), out=out_t)
 
@@ -56,10 +57,10 @@ if flag:
 
 # ===============================  example 4 ===============================
 # 通过torch.full创建全1张量
-flag = True
-# flag = False
+# flag = True
+flag = False
 if flag:
-    t = torch.full((3, 3), 1.)  # 1.6之后若不指定dtype，就需要传入浮点数
+    t = torch.full((3, 3), 66.01)  # 1.6之后若不指定dtype，就需要传入浮点数
     print(t)
 
 
@@ -82,16 +83,24 @@ if flag:
 
 # ===============================  example 7 ===============================
 # 通过torch.normal创建正态分布张量
-# flag = True
-flag = False
+flag = True
+# flag = False
 if flag:
 
     # mean：张量 std: 张量
-    # mean = torch.arange(1, 5, dtype=torch.float)
-    # std = torch.arange(1, 5, dtype=torch.float)
-    # t_normal = torch.normal(mean, std)
-    # print("mean:{}\nstd:{}".format(mean, std))
-    # print(t_normal)
+    mean = torch.arange(1, 6, dtype=torch.float)
+    std = torch.arange(1, 6, dtype=torch.float)
+    t_normal = torch.normal(0.0, std)
+    print("mean:{}\nstd:{}".format(mean, std))
+    print(t_normal)
+
+    zz=torch.zeros((5,6))
+    print(zz)
+
+
+
+    # nn = torch.normal(0, 1, 100)
+    # print(nn)
 
     # mean：标量 std: 标量
     # t_normal = torch.normal(0., 1., size=(4,))

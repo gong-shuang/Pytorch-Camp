@@ -16,6 +16,7 @@ import numpy as np
 
 # fake data
 inputs = torch.tensor([[1, 2], [1, 3], [1, 3]], dtype=torch.float)
+# inputs = torch.tensor([[1, 1, 1], [1, 2, 1], [1, 1, 1]], dtype=torch.float)
 target = torch.tensor([0, 1, 1], dtype=torch.long)
 
 # ----------------------------------- CrossEntropy loss: reduction -----------------------------------
@@ -42,23 +43,24 @@ if flag:
 
     idx = 0
 
-    input_1 = inputs.detach().numpy()[idx]      # [1, 2]
+    input_1 = inputs.detach().numpy()[idx]      # [1, 1, 1]
     target_1 = target.numpy()[idx]              # [0]
 
     # 第一项
-    x_class = input_1[target_1]
+    x_class = input_1[target_1]  # 1.0
 
     # 第二项
-    sigma_exp_x = np.sum(list(map(np.exp, input_1)))
-    log_sigma_exp_x = np.log(sigma_exp_x)
+    sigma_exp_x = np.sum(list(map(np.exp, input_1)))  #8.154845
+    log_sigma_exp_x = np.log(sigma_exp_x)   #2.098123
 
     # 输出loss
+    # ln(e`X1/(e`X1+e`X2+e`X3))  = ln(eX1) - ln(e`X1+e`X2+e`X3) = X1 - ln(e`X1+e`X2+e`X3)
     loss_1 = -x_class + log_sigma_exp_x
 
     print("第一个样本loss为: ", loss_1)
 
 
-# ----------------------------------- weight -----------------------------------
+# -----------------------------------带权重 weight -----------------------------------
 flag = 0
 # flag = 1
 if flag:
@@ -66,6 +68,7 @@ if flag:
     weights = torch.tensor([1, 2], dtype=torch.float)
     # weights = torch.tensor([0.7, 0.3], dtype=torch.float)
 
+# 这个 weight 只在最后选取的时候，对应位置乘以 weight。
     loss_f_none_w = nn.CrossEntropyLoss(weight=weights, reduction='none')
     loss_f_sum = nn.CrossEntropyLoss(weight=weights, reduction='sum')
     loss_f_mean = nn.CrossEntropyLoss(weight=weights, reduction='mean')
@@ -131,6 +134,9 @@ if flag:
     # itarget
     inputs = torch.sigmoid(inputs)
 
+    # 对softmax结果取log
+    log_output = torch.log(inputs)
+
     weights = torch.tensor([1, 1], dtype=torch.float)
 
     loss_f_none_w = nn.BCELoss(weight=weights, reduction='none')
@@ -143,6 +149,8 @@ if flag:
     loss_mean = loss_f_mean(inputs, target_bce)
 
     # view
+    print("\ninputs: ", inputs)
+    print("\nlog_output: ", log_output)
     print("\nweights: ", weights)
     print("BCE Loss", loss_none_w, loss_sum, loss_mean)
 
@@ -153,6 +161,9 @@ flag = 0
 if flag:
 
     idx = 0
+
+    inputs = torch.tensor([[1, 2]], dtype=torch.float)
+    target = torch.tensor([[1, 0]], dtype=torch.float)
 
     x_i = inputs.detach().numpy()[idx, idx]
     y_i = target.numpy()[idx, idx]              #
@@ -195,8 +206,8 @@ if flag:
 
 # --------------------------------- pos weight
 
-# flag = 0
-flag = 1
+flag = 0
+# flag = 1
 if flag:
     inputs = torch.tensor([[1, 2], [2, 2], [3, 4], [4, 5]], dtype=torch.float)
     target = torch.tensor([[1, 0], [1, 0], [0, 1], [0, 1]], dtype=torch.float)

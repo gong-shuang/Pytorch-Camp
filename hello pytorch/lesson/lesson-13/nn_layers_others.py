@@ -3,7 +3,7 @@
 # @file name  : nn_layers_others.py
 # @author     : tingsongyu
 # @date       : 2019-09-25 10:08:00
-# @brief      : 其它网络层
+# @brief      : 其它网络层（3-4）
 """
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -41,25 +41,25 @@ img_tensor.unsqueeze_(dim=0)    # C*H*W to B*C*H*W
 # flag = 1
 flag = 0
 if flag:
-    maxpool_layer = nn.MaxPool2d((2, 2), stride=(2, 2))   # input:(i, o, size) weights:(o, i , h, w)
+    maxpool_layer = nn.MaxPool2d((4, 4), stride=(4, 4))   # input:(i, o, size) weights:(o, i , h, w)
     img_pool = maxpool_layer(img_tensor)
 
 # ================ avgpool
 # flag = 1
 flag = 0
 if flag:
-    avgpoollayer = nn.AvgPool2d((2, 2), stride=(2, 2))   # input:(i, o, size) weights:(o, i , h, w)
+    avgpoollayer = nn.AvgPool2d((4, 4), stride=(4, 4))   # input:(i, o, size) weights:(o, i , h, w)
     img_pool = avgpoollayer(img_tensor)
 
 # ================ avgpool divisor_override
 # flag = 1
 flag = 0
 if flag:
-    img_tensor = torch.ones((1, 1, 4, 4))
-    avgpool_layer = nn.AvgPool2d((2, 2), stride=(2, 2), divisor_override=3)
+    # img_tensor = torch.ones((1, 1, 4, 4))
+    avgpool_layer = nn.AvgPool2d((2, 2), stride=(2, 2), divisor_override=4)
     img_pool = avgpool_layer(img_tensor)
 
-    print("raw_img:\n{}\npooling_img:\n{}".format(img_tensor, img_pool))
+    # print("raw_img:\n{}\npooling_img:\n{}".format(img_tensor, img_pool))
 
 
 # ================ max unpool

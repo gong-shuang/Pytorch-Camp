@@ -118,7 +118,7 @@ flag = 0
 # flag = 1
 if flag:
 
-    t_max = 50
+    t_max = 100
     scheduler_lr = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=t_max, eta_min=0.)
 
     lr_list, epoch_list = list(), list()
@@ -176,8 +176,8 @@ if flag:
 
 
 # ------------------------------ 6 lambda ------------------------------
-# flag = 0
-flag = 1
+flag = 0
+# flag = 1
 if flag:
 
     lr_init = 0.1

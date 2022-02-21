@@ -19,8 +19,8 @@ from tools.common_tools import set_seed
 set_seed(1)  # 设置随机种子
 
 # ----------------------------------- 0 SummaryWriter -----------------------------------
-flag = 0
-# flag = 1
+# flag = 0
+flag = 1
 if flag:
 
     log_dir = "./train_log/test_log_dir"

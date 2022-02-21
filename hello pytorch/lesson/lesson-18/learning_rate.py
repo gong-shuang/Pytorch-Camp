@@ -23,8 +23,8 @@ x = torch.tensor([2.], requires_grad=True)
 
 
 # ------------------------------ plot data ------------------------------
-flag = 0
-# flag = 1
+# flag = 0
+flag = 1
 if flag:
 
     x_t = torch.linspace(-3, 3, 100)
@@ -38,8 +38,8 @@ if flag:
 
 
 # ------------------------------ gradient descent ------------------------------
-flag = 0
-# flag = 1
+# flag = 0
+flag = 1
 if flag:
     iter_rec, loss_rec, x_rec = list(), list(), list()
 

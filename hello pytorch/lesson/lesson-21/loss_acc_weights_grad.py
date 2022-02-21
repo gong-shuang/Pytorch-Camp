@@ -86,7 +86,7 @@ valid_curve = list()
 iter_count = 0
 
 # 构建 SummaryWriter
-writer = SummaryWriter(comment='test_your_comment', filename_suffix="_test_your_filename_suffix")
+writer = SummaryWriter(comment='_test_your_comment', filename_suffix="_test_your_filename_suffix")
 
 for epoch in range(MAX_EPOCH):
 

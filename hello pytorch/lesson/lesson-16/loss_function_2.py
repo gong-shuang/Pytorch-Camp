@@ -264,8 +264,8 @@ if flag:
     print(loss_h)
 
 # ---------------------------------------------- 15 Triplet Margin Loss -----------------------------------------
-flag = 0
-# flag = 1
+# flag = 0
+flag = 1
 if flag:
 
     anchor = torch.tensor([[1.]])
@@ -352,8 +352,8 @@ if flag:
 
 
 # ---------------------------------------------- 18 CTC Loss -----------------------------------------
-# flag = 0
-flag = 1
+flag = 0
+# flag = 1
 if flag:
     T = 50      # Input sequence length
     C = 20      # Number of classes (including blank)

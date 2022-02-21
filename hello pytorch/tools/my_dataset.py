@@ -27,6 +27,7 @@ class RMBDataset(Dataset):
         self.data_info = self.get_img_info(data_dir)  # data_info存储所有图片路径和标签，在DataLoader中通过index读取样本
         self.transform = transform
 
+    # 必须要重写这个函数 __getitem__(self, index)
     def __getitem__(self, index):
         path_img, label = self.data_info[index]
         img = Image.open(path_img).convert('RGB')     # 0~255

@@ -49,11 +49,12 @@ valid_dir = os.path.join(split_dir, "valid")
 norm_mean = [0.485, 0.456, 0.406]
 norm_std = [0.229, 0.224, 0.225]
 
+# Compose 将一系列的变化有序组合
 train_transform = transforms.Compose([
     transforms.Resize((32, 32)),
-    transforms.RandomCrop(32, padding=4),
+    transforms.RandomCrop(32, padding=4),    #随机裁剪
     transforms.ToTensor(),
-    transforms.Normalize(norm_mean, norm_std),
+    transforms.Normalize(norm_mean, norm_std),   #数据标准化，均值为0，方差为1
 ])
 
 valid_transform = transforms.Compose([
@@ -166,7 +167,8 @@ plt.show()
 # ============================ inference ============================
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-test_dir = os.path.join(BASE_DIR, "test_data")
+# test_dir = os.path.join(BASE_DIR, "test_data")
+test_dir = os.path.join(BASE_DIR, "..", "..", "data", "rmb_split", "test")
 
 test_data = RMBDataset(data_dir=test_dir, transform=valid_transform)
 valid_loader = DataLoader(dataset=test_data, batch_size=1)
