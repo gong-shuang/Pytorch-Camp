@@ -26,6 +26,7 @@ flag = 0
 # flag = 1
 if flag:
 
+    # step_size 步后，就调整学习率。
     scheduler_lr = optim.lr_scheduler.StepLR(optimizer, step_size=50, gamma=0.1)  # 设置学习率下降策略
 
     lr_list, epoch_list = list(), list()
@@ -50,6 +51,7 @@ if flag:
     plt.ylabel("Learning rate")
     plt.legend()
     plt.show()
+    print(lr_list)
 
 
 # ------------------------------ 2 Multi Step LR ------------------------------
@@ -63,7 +65,8 @@ if flag:
     lr_list, epoch_list = list(), list()
     for epoch in range(max_epoch):
 
-        lr_list.append(scheduler_lr.get_lr())
+        # lr_list.append(scheduler_lr.get_lr())
+        lr_list.append(scheduler_lr.get_last_lr())   # 获取最后一个学习率。
         epoch_list.append(epoch)
 
         for i in range(iteration):
@@ -94,7 +97,8 @@ if flag:
     lr_list, epoch_list = list(), list()
     for epoch in range(max_epoch):
 
-        lr_list.append(scheduler_lr.get_lr())
+        # lr_list.append(scheduler_lr.get_lr())
+        lr_list.append(scheduler_lr.get_last_lr())
         epoch_list.append(epoch)
 
         for i in range(iteration):
@@ -176,8 +180,8 @@ if flag:
 
 
 # ------------------------------ 6 lambda ------------------------------
-flag = 0
-# flag = 1
+# flag = 0
+flag = 1
 if flag:
 
     lr_init = 0.1
@@ -192,6 +196,7 @@ if flag:
     lambda1 = lambda epoch: 0.1 ** (epoch // 20)
     lambda2 = lambda epoch: 0.95 ** epoch
 
+    # 自定义，定义了两个学习率调整
     scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=[lambda1, lambda2])
 
     lr_list, epoch_list = list(), list()
@@ -206,6 +211,7 @@ if flag:
         scheduler.step()
 
         lr_list.append(scheduler.get_lr())
+        # lr_list.append(scheduler_lr.get_last_lr())
         epoch_list.append(epoch)
 
         print('epoch:{:5d}, lr:{}'.format(epoch, scheduler.get_lr()))

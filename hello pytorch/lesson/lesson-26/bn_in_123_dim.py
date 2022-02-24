@@ -51,8 +51,8 @@ if flag:
 
 
 # ======================================== nn.BatchNorm2d
-flag = 1
-# flag = 0
+# flag = 1
+flag = 0
 if flag:
 
     batch_size = 3
@@ -81,8 +81,8 @@ if flag:
         print("iter:{}, bias.shape: {}".format(i, bn.bias.shape))
 
 # ======================================== nn.BatchNorm3d
-# flag = 1
-flag = 0
+flag = 1
+# flag = 0
 if flag:
 
     batch_size = 3

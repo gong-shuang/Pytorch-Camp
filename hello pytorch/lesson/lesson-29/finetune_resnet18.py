@@ -91,12 +91,12 @@ if flag:
     resnet18_ft.load_state_dict(state_dict_load)
 
 # 法1 : 冻结卷积层
-flag_m1 = 0
-# flag_m1 = 1
+# flag_m1 = 0
+flag_m1 = 1
 if flag_m1:
     for param in resnet18_ft.parameters():
         param.requires_grad = False
-    # print("conv1.weights[0, 0, ...]:\n {}".format(resnet18_ft.conv1.weight[0, 0, ...]))
+    print("conv1.weights[0, 0, ...]:\n {}".format(resnet18_ft.conv1.weight[0, 0, ...]))
 
 
 # 3/3 替换fc层
@@ -166,7 +166,7 @@ for epoch in range(start_epoch + 1, MAX_EPOCH):
             loss_mean = 0.
 
             # if flag_m1:
-            print("epoch:{} conv1.weights[0, 0, ...] :\n {}".format(epoch, resnet18_ft.conv1.weight[0, 0, ...]))
+            # print("epoch:{} conv1.weights[0, 0, ...] :\n {}".format(epoch, resnet18_ft.conv1.weight[0, 0, ...]))
 
     scheduler.step()  # 更新学习率
 

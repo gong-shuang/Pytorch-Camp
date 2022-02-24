@@ -25,8 +25,8 @@ from tools.common_tools import set_seed
 
 set_seed(1)  # 设置随机种子
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-device = torch.device("cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# device = torch.device("cpu")
 
 
 # Read a file and split into lines

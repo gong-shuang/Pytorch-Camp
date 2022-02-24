@@ -21,10 +21,12 @@ def func(x_t):
 # init
 x = torch.tensor([2.], requires_grad=True)
 
+print("x:\n", x)
+
 
 # ------------------------------ plot data ------------------------------
-# flag = 0
-flag = 1
+flag = 0
+# flag = 1
 if flag:
 
     x_t = torch.linspace(-3, 3, 100)
@@ -38,8 +40,8 @@ if flag:
 
 
 # ------------------------------ gradient descent ------------------------------
-# flag = 0
-flag = 1
+flag = 0
+# flag = 1
 if flag:
     iter_rec, loss_rec, x_rec = list(), list(), list()
 
@@ -48,7 +50,7 @@ if flag:
 
     for i in range(max_iteration):
 
-        y = func(x)
+        y = func(x)       # x 受梯度的变化。
         y.backward()
 
         print("Iter:{}, X:{:8}, X.grad:{:8}, loss:{:10}".format(

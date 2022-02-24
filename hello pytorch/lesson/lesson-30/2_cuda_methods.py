@@ -13,6 +13,8 @@ if flag:
     gpu_str = "cuda:{}".format(gpu_id)
     device = torch.device(gpu_str if torch.cuda.is_available() else "cpu")
 
+    print("device:  ", device)
+
     x_cpu = torch.ones((3, 3))
     x_gpu = x_cpu.to(device)
 
@@ -27,6 +29,8 @@ if flag:
     print("\ndevice_count: {}".format(device_count))
 
     device_name = torch.cuda.get_device_name(0)
+    print("\ndevice_name: {}".format(device_name))
+    device_name = torch.cuda.get_device_name(1)
     print("\ndevice_name: {}".format(device_name))
 
 

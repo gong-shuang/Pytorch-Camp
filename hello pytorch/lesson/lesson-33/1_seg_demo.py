@@ -18,6 +18,8 @@ from matplotlib import pyplot as plt
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+import torchvision.models as models
+
 if __name__ == "__main__":
 
 
@@ -37,7 +39,8 @@ if __name__ == "__main__":
     # 1. load data & model
     input_image = Image.open(path_img).convert("RGB")
     print("\n 注意，由于网络问题，cache的获取可能要较长时间，可自行下载并解压，放到↓↓↓的路径中")
-    model = torch.hub.load('pytorch/vision', 'deeplabv3_resnet101', pretrained=True)
+    # model = torch.hub.load('pytorch/vision', 'deeplabv3_resnet101', pretrained=True)
+    model = torch.hub.load('pytorch/vision:v0.10.0', 'deeplabv3_resnet101', pretrained=True)
     model.eval()
 
     # 2. preprocess

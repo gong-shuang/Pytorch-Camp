@@ -60,7 +60,7 @@ if flag:
     iteration = 100
     m = 0.9     # .9 .63
 
-    lr_list = [0.01, 0.03]
+    lr_list = [0.01, 0.02]
 
     momentum_list = list()
     loss_rec = [[] for l in range(len(lr_list))]
@@ -69,7 +69,7 @@ if flag:
     for i, lr in enumerate(lr_list):
         x = torch.tensor([2.], requires_grad=True)
 
-        momentum = 0. if lr == 0.03 else m
+        momentum = 0. if lr == 0.02 else m
         momentum_list.append(momentum)
 
         optimizer = optim.SGD([x], lr=lr, momentum=momentum)
@@ -85,6 +85,7 @@ if flag:
             loss_rec[i].append(y.item())
 
     for i, loss_r in enumerate(loss_rec):
+        print("LR: {} M:{}".format(lr_list[i], momentum_list[i]))
         plt.plot(range(len(loss_r)), loss_r, label="LR: {} M:{}".format(lr_list[i], momentum_list[i]))
     plt.legend()
     plt.xlabel('Iterations')

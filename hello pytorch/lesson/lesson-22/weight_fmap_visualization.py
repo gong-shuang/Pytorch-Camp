@@ -23,8 +23,8 @@ set_seed(1)  # 设置随机种子
 
 
 # ----------------------------------- kernel visualization -----------------------------------
-# flag = 0
-flag = 1
+flag = 0
+# flag = 1
 if flag:
     writer = SummaryWriter(comment='test_your_comment', filename_suffix="_test_your_filename_suffix")
 
@@ -57,8 +57,8 @@ if flag:
 
 
 # ----------------------------------- feature map visualization -----------------------------------
-flag = 0
-# flag = 1
+# flag = 0
+flag = 1
 if flag:
     with torch.no_grad():
         writer = SummaryWriter(comment='test_your_comment', filename_suffix="_test_your_filename_suffix")

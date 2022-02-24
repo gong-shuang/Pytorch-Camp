@@ -34,12 +34,16 @@ if flag:
         a_grad.append(grad)
 
     handle = a.register_hook(grad_hook)
+    handle = b.register_hook(grad_hook)
+    handle = y.register_hook(grad_hook)
 
     y.backward()
 
     # 查看梯度
     print("gradient:", w.grad, x.grad, a.grad, b.grad, y.grad)
     print("a_grad[0]: ", a_grad[0])
+    print("a_grad[1]: ", a_grad[1])
+    print("a_grad[2]: ", a_grad[2])
     handle.remove()
 
 
@@ -57,6 +61,7 @@ if flag:
     a_grad = list()
 
     def grad_hook(grad):
+        print("grad: ", grad)
         grad *= 2
         return grad*3
 
@@ -88,6 +93,7 @@ if flag:
     def forward_hook(module, data_input, data_output):
         fmap_block.append(data_output)
         input_block.append(data_input)
+        print("forward_hook input:{}".format(data_input))
 
     def forward_pre_hook(module, data_input):
         print("forward_pre_hook input:{}".format(data_input))

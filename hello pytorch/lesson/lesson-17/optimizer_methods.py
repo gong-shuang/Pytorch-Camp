@@ -19,9 +19,9 @@ from tools.common_tools import set_seed
 set_seed(1)  # 设置随机种子
 
 weight = torch.randn((2, 2), requires_grad=True)
-weight.grad = torch.ones((2, 2))
+weight.grad = torch.ones((2, 2))   # 这里设置了梯度为1。
 
-optimizer = optim.SGD([weight], lr=0.1)
+optimizer = optim.SGD([weight], lr=0.01)
 
 # ----------------------------------- step -----------------------------------
 flag = 0
@@ -49,8 +49,8 @@ if flag:
 
 
 # ----------------------------------- add_param_group -----------------------------------
-# flag = 0
-flag = 1
+flag = 0
+# flag = 1
 if flag:
     print("optimizer.param_groups is\n{}".format(optimizer.param_groups))
 
@@ -65,21 +65,24 @@ flag = 0
 # flag = 1
 if flag:
 
+    print("weight before step:{}".format(weight.data))
+
     optimizer = optim.SGD([weight], lr=0.1, momentum=0.9)
     opt_state_dict = optimizer.state_dict()
 
     print("state_dict before step:\n", opt_state_dict)
 
-    for i in range(10):
+    for i in range(5):
         optimizer.step()
 
     print("state_dict after step:\n", optimizer.state_dict())
 
+#保存 状态信息。
     torch.save(optimizer.state_dict(), os.path.join(BASE_DIR, "optimizer_state_dict.pkl"))
 
 # -----------------------------------load state_dict -----------------------------------
-flag = 0
-# flag = 1
+# flag = 0
+flag = 1
 if flag:
 
     optimizer = optim.SGD([weight], lr=0.1, momentum=0.9)

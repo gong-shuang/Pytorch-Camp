@@ -14,6 +14,7 @@ if flag:
     gpu_list_str = ','.join(map(str, gpu_list))
     os.environ.setdefault("CUDA_VISIBLE_DEVICES", gpu_list_str)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print("device:  ", device)
 
 
 # ============================ 依内存情况自动选择主gpu
@@ -41,6 +42,7 @@ if flag:
         gpu_list_str = ','.join(map(str, gpu_list))
         os.environ.setdefault("CUDA_VISIBLE_DEVICES", gpu_list_str)
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        print("device:  ", device)
 
 
 class FooNet(nn.Module):
@@ -76,7 +78,7 @@ if __name__ == "__main__":
     # training
     for epoch in range(1):
 
-        outputs = net(inputs)
+        outputs = net(inputs)   # 有输出
 
         print("model outputs.size: {}".format(outputs.size()))
 

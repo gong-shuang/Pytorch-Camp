@@ -60,14 +60,14 @@ net_weight_decay = MLP(neural_num=n_hidden)
 
 # ============================ step 3/5 优化器 ============================
 optim_normal = torch.optim.SGD(net_normal.parameters(), lr=lr_init, momentum=0.9)
-optim_wdecay = torch.optim.SGD(net_weight_decay.parameters(), lr=lr_init, momentum=0.9, weight_decay=1e-2)
+optim_wdecay = torch.optim.SGD(net_weight_decay.parameters(), lr=lr_init, momentum=0.9, weight_decay=1e-2)   # 权值衰减，在优化器的时候设置。
 
 # ============================ step 4/5 损失函数 ============================
 loss_func = torch.nn.MSELoss()
 
 # ============================ step 5/5 迭代训练 ============================
 
-writer = SummaryWriter(comment='_test_tensorboard', filename_suffix="12345678")
+writer = SummaryWriter(comment='_test_tensorboard', filename_suffix="12345678")    # 设置 tensorboard
 for epoch in range(max_iter):
 
     # forward

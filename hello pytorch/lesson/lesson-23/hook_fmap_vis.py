@@ -19,6 +19,8 @@ sys.path.append(hello_pytorch_DIR)
 
 from tools.common_tools import set_seed
 import torchvision.models as models
+from matplotlib import pyplot as plt
+from tools.common_tools import transform_invert
 
 set_seed(1)  # 设置随机种子
 
@@ -65,8 +67,12 @@ if flag:
 
                 alexnet._modules[n1]._modules[n2].register_forward_hook(hook_func)
 
+        print(fmap_dict)
+
         # forward
         output = alexnet(img_tensor)
+
+        print(output)
 
         # add image
         for layer_name, fmap_list in fmap_dict.items():
@@ -76,6 +82,11 @@ if flag:
             nrow = int(np.sqrt(fmap.shape[0]))
             fmap_grid = vutils.make_grid(fmap, normalize=True, scale_each=True, nrow=nrow)
             writer.add_image('feature map in {}'.format(layer_name), fmap_grid, global_step=322)
+
+        img_raw = transform_invert(img_tensor.squeeze(), img_transforms)
+        plt.subplot(121).imshow(output)
+        plt.subplot(122).imshow(img_raw)
+        plt.show()
 
 
 

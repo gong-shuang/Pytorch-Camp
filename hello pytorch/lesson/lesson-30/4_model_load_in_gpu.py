@@ -45,8 +45,8 @@ if flag:
 
 
 # =================================== 多gpu 保存
-flag = 0
-# flag = 1
+# flag = 0
+flag = 1
 if flag:
 
     if torch.cuda.device_count() < 2:
@@ -54,7 +54,8 @@ if flag:
         import sys
         sys.exit(0)
 
-    gpu_list = [0, 1, 2, 3]
+    # gpu_list = [0, 1, 2, 3]    # 需要手动调整。
+    gpu_list = [0, 1]
     gpu_list_str = ','.join(map(str, gpu_list))
     os.environ.setdefault("CUDA_VISIBLE_DEVICES", gpu_list_str)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -69,8 +70,8 @@ if flag:
     torch.save(net_state_dict, path_state_dict)
 
 # =================================== 多gpu 加载
-# flag = 0
-flag = 1
+flag = 0
+# flag = 1
 if flag:
 
     net = FooNet(neural_num=3, layers=3)
